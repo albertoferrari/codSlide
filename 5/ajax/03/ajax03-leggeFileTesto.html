@@ -1,0 +1,43 @@
+<html>
+<head>
+<script type="text/javascript">
+var xmlhttp;
+function loadXMLDoc(url)
+{
+	xmlhttp=null;
+	xmlhttp = new XMLHttpRequest();
+	if (xmlhttp!=null) 
+	{
+	  xmlhttp.onreadystatechange=state_Change;
+	  xmlhttp.open("GET",url,true);
+	  xmlhttp.send(null);
+	}
+	else
+	{
+	  alert("Your browser does not support XMLHTTP.");
+	}
+}
+
+function state_Change()
+{
+if (xmlhttp.readyState==4)
+  {// 4 = "loaded"
+  if (xmlhttp.status==200)
+    {// 200 = "OK"
+    document.getElementById('T1').innerHTML=xmlhttp.responseText;
+    }
+  else
+    {
+    alert("Problem retrieving data:" + xmlhttp.statusText);
+    }
+  }
+}
+</script>
+</head>
+
+<body onload="loadXMLDoc('testo1.txt')">
+<div id="T1" style="border:1px solid black;height:40;width:300;padding:5"></div><br />
+<button onclick="loadXMLDoc('testo2.php')">Click</button>
+</body>
+
+</html>

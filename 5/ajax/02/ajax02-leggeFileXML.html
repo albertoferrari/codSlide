@@ -1,0 +1,47 @@
+<html>
+<head>
+	<title>Ajax alert da file XML</title>
+</head>
+<body>
+
+<script type="text/javascript" language="javascript"> 
+
+    function eseguiRichiesta(url) {
+
+        var http_request = false;
+        http_request = new XMLHttpRequest();
+
+        if (!http_request) {
+            alert("Non e' possibile creare una istanza XMLHTTP");
+            return false;
+        }
+        http_request.onreadystatechange = function() { visualizzaContenuto(http_request); };
+        http_request.open('GET', url, true);
+        http_request.send(null);
+
+    }
+
+    function visualizzaContenuto(http_request) {
+
+        if (http_request.readyState == 4) {
+            if (http_request.status == 200) {
+				var documentoXML = http_request.responseXML;
+				var nodoInformazione = documentoXML.getElementsByTagName('informazione').item(0);
+				alert(nodoInformazione.firstChild.data);
+            } else {
+                alert('Si è verificato un problema con la richiesta');
+            }
+        }
+
+    }
+</script>
+<span
+    style="cursor: pointer; text-decoration: underline"
+    onclick="eseguiRichiesta('testo.xml')">
+        Richiedi informazioni al server
+</span>
+
+
+</div>
+</body>
+</html>

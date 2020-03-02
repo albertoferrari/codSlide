@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>Ajax alert da file XML</title>
+
+<script type="text/javascript" language="javascript"> 
+var http_request = false;			// oggetto XMLHttpRequest per richiesta servizio al server
+
+function eseguiRichiesta(url) {		// nome del file (URL) da richiedere al server
+	http_request = new XMLHttpRequest();	
+	if (!http_request) {
+		alert("Non e' possibile creare una istanza XMLHTTP");
+		return false;
+	}
+
+	http_request.onreadystatechange = visualizzaContenuto;			// funzione che viene attivata per rispondere all'evento
+	http_request.open('GET', url, true);							// definizione della richiesta
+	http_request.send(null);										// invio richiesta
+}
+
+function visualizzaContenuto() {
+
+	if (http_request.readyState == 4) {								// risposta ricevuta
+		if (http_request.status == 200) {							// nessun errore
+			alert(http_request.responseText);
+		} else {
+			alert('Si è verificato un problema con la richiesta');
+		}
+	}
+
+}
+</script>
+
+</head>
+
+<body>
+   
+<div onclick="eseguiRichiesta('testo.txt')">Richiedi informazioni al server</div>
+
+</body>
+</html>

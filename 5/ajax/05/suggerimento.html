@@ -1,0 +1,32 @@
+<html>
+<head>
+<script>
+function showHint(str) {
+    // se il campo testo è vuoro ritorna
+    if (str.length == 0) { 
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+    } else {
+	// altrimenti invoca il metodo open di XMLHttpRequest che al sollevarsi 
+	// dell'evento onreadystatechange popola il campo di testo (con attributo innerHTML) txtHint
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET", "getsuggerimento.php?q=" + str, true);
+        xmlhttp.send();
+    }
+}
+</script>
+</head>
+<body>
+
+<p><b>Scrivi un nome di persona:</b></p>
+<form> 
+Nome: <input type="text" onkeyup="showHint(this.value)">
+</form>
+<p>Suggerimento: <span id="txtHint"></span></p>
+</body>
+</html>
