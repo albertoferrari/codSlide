@@ -2,7 +2,7 @@
  @author Alberto Ferrari - https://albertoferrari.github.io/
  @license This software is free - http://www.gnu.org/licenses/gpl.html
  
- ordinamento bozo sort
+ ordinamento stupid sort
 '''
 import time
 from random import randint, shuffle
